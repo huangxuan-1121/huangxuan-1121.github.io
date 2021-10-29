@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="First"/>
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="javascript继承实现.md"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="First"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="ShanJun&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://example.comimg/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://example.comimg/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>javascript继承实现.md - ShanJun&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ShanJun</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://github.com/huangxuan-1121">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>javascript继承实现.md</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2021-10-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/JavaScript/">#JavaScript</a> <a href="/tags/前端/">#前端</a> <a href="/tags/面试/">#面试</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/JavaScript/">JavaScript</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h4 id="继承实现"><a href="#继承实现" class="headerlink" title="继承实现"></a>继承实现</h4><h5 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">标题:原型链继承</span></span><br><span class="line"><span class="comment">核心：父类的实例作为子类的原型</span></span><br><span class="line"><span class="comment">优点：共享了父类的方法</span></span><br><span class="line"><span class="comment">缺点:</span></span><br><span class="line"><span class="comment"> 1.无法传递参数</span></span><br><span class="line"><span class="comment"> 2.父类有引用类型参数 修改子类会对其他子类进行影响</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">优点：非常纯粹的继承关系、简单易用、父类新增的原型方法原型属性子类都可以访问到。</span></span><br><span class="line"><span class="comment">缺点：要为子类新增属性和方法，必须要放到 new father()之后，不能放到构造器中，来自原型对象的引用类型被所有实力共享，创建子类，无法向构造函数传参。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.eat = <span class="string">&quot;吃饭&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="built_in">this</span>.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>今年<span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span>岁了`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, work</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.work = work;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">child.prototype = <span class="keyword">new</span> parent(); <span class="comment">//关键句</span></span><br><span class="line"><span class="keyword">let</span> c1 = <span class="keyword">new</span> child(<span class="string">&#x27;hx1&#x27;</span>, <span class="number">15</span>, <span class="string">&#x27;学生&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> c2 = <span class="keyword">new</span> child(<span class="string">&#x27;hx2&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;码农&#x27;</span>);</span><br><span class="line">c1.arr.push(<span class="number">6</span>);</span><br><span class="line"><span class="built_in">console</span>.log(c1.arr, c2.arr)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">标题: 构造函数继承</span></span><br><span class="line"><span class="comment">核心：使用父类构造函数来增强子类的实例</span></span><br><span class="line"><span class="comment">优点：</span></span><br><span class="line"><span class="comment">    1.不会对引用类型造成影响</span></span><br><span class="line"><span class="comment">    2.可以向父类传参</span></span><br><span class="line"><span class="comment">缺点:</span></span><br><span class="line"><span class="comment">    1.会造成多余内存消耗，方法不能复用</span></span><br><span class="line"><span class="comment">    2.不能继承原型链上的方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.eat = <span class="string">&quot;吃饭&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="built_in">this</span>.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>今年<span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span>岁了`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, work</span>) </span>&#123;</span><br><span class="line">    parent.apply(<span class="built_in">this</span>,<span class="built_in">arguments</span>);  <span class="comment">//关键句</span></span><br><span class="line">    <span class="built_in">this</span>.work = work;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> child(<span class="string">&#x27;hx1&#x27;</span>,<span class="number">15</span>,<span class="string">&#x27;学生&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="keyword">new</span> child(<span class="string">&#x27;hx2&#x27;</span>,<span class="number">25</span>,<span class="string">&#x27;码农&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">标题: 组合继承=原型继承+构造函数继承</span></span><br><span class="line"><span class="comment">核心：通过调用父类的构造，继承父类属性并保留传递参数的点，通过父类的实例作为子类原型，实现函数复用。</span></span><br><span class="line"><span class="comment">优点：</span></span><br><span class="line"><span class="comment">    1.能够传递参数</span></span><br><span class="line"><span class="comment">    2.能够继承原型链上的方法</span></span><br><span class="line"><span class="comment">    3.不共享引用类型</span></span><br><span class="line"><span class="comment">缺点:</span></span><br><span class="line"><span class="comment">    1.会创建两次父类构造函数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.eat = <span class="string">&quot;吃饭&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="built_in">this</span>.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>今年<span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span>岁了`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">parent.prototype.pushArr = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.arr.push(val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, work</span>) </span>&#123;</span><br><span class="line">    parent.apply(<span class="built_in">this</span>,<span class="built_in">arguments</span>); <span class="comment">//关键句</span></span><br><span class="line">    <span class="built_in">this</span>.work = work;</span><br><span class="line">&#125;</span><br><span class="line">child.prototype = <span class="keyword">new</span> parent(); <span class="comment">//关键句</span></span><br><span class="line">child.prototype.constructor=child; <span class="comment">//关键句，//将 child 原型对象的 constructor 指针重新指向 child 本身</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> child(<span class="string">&#x27;hx1&#x27;</span>,<span class="number">15</span>,<span class="string">&#x27;学生&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="keyword">new</span> child(<span class="string">&#x27;hx2&#x27;</span>,<span class="number">25</span>,<span class="string">&#x27;码农&#x27;</span>);</span><br><span class="line">p1.pushArr(<span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p1.arr,p2.arr)</span><br></pre></td></tr></table></figure>
+
+<h5 id="寄生组合继承"><a href="#寄生组合继承" class="headerlink" title="寄生组合继承"></a>寄生组合继承</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">寄生组合继承核心：砍掉父类的实例属性，这样，在调用两次父类的构造时候，就不会初始化两次实例方法和属性，避免组合继承的缺点</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.eat = <span class="string">&quot;吃饭&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="built_in">this</span>.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>今年<span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span>岁了`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">parent.prototype.pushArr = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.arr.push(val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, work</span>) </span>&#123;</span><br><span class="line">    parent.apply(<span class="built_in">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="built_in">this</span>.work = work;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// child.prototype = Object.create(parent.prototype);</span></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">fn.prototype = parent.prototype;  <span class="comment">//副本</span></span><br><span class="line">child.prototype=<span class="keyword">new</span> fn(); <span class="comment">//</span></span><br><span class="line">child.prototype.constructor=child; <span class="comment">//增强对象</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> child(<span class="string">&#x27;hx1&#x27;</span>,<span class="number">15</span>,<span class="string">&#x27;学生&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="keyword">new</span> child(<span class="string">&#x27;hx2&#x27;</span>,<span class="number">25</span>,<span class="string">&#x27;码农&#x27;</span>);</span><br><span class="line">child.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name+<span class="string">&#x27;跑了起来&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">p1.pushArr(<span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p1.run(),p2.run())</span><br></pre></td></tr></table></figure>
+
+<p>Es6 中我们直接可以使用 extends 关键字去继承，通过重写 super 完成继承</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/huangxuan-1121" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2021 ShanJun&#39;s Blog<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
