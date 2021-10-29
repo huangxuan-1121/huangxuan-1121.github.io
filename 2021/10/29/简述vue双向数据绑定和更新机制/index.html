@@ -21,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="ShanJun&#39;s Blog"/>
+        <meta property="og:title" content="简述vue双向数据绑定和更新机制"/>
     
 
     <!--Open Graph Description-->
@@ -34,7 +34,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -53,7 +53,7 @@
 
     <!-- Title -->
     
-    <title>归档：2021/10 - ShanJun&#39;s Blog</title>
+    <title>简述vue双向数据绑定和更新机制 - ShanJun&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -157,75 +157,90 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2021/10</h1>
+                <div class="post-heading">
+                    <h1>简述vue双向数据绑定和更新机制</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2021-10-29
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/vue/">#vue</a> <a href="/tags/前端/">#前端</a> <a href="/tags/面试/">#面试</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/vue/">vue</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2021/10/29/简述vue双向数据绑定和更新机制/">
-        <h1 class="post-title archive">
-            简述vue双向数据绑定和更新机制
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2021-10-29
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2021/10/20/网络篇——前端面试/">
-        <h1 class="post-title archive">
-            网络篇——前端面试
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2021-10-20
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h4 id="Vue双向绑定的原理"><a href="#Vue双向绑定的原理" class="headerlink" title="Vue双向绑定的原理"></a>Vue双向绑定的原理</h4><p>答：在Vue中为每个属性都是用defineProperty()方法进行数据劫持，并且为每个属性分配一个订阅者集合的管理数组dep;在编译的时候会为属性的管理数组dep中添加订阅者，当修改属性值时会触发属性的set方法，在set方法内通知订阅者数组，订阅者数组循环利用各个订阅者的update方法更新视图。</p>
+<p>扩展：virtual dom和Diff原理</p>
+<p>虚拟dom：用js来描述dom节点</p>
+<p>diff算法：就是用虚拟节点进行比较，并返回一个patch对象，来存储两个节点变更的地方，最后利用patch记录去跟更新局部dom；换句话说，diff的过程就是调用patch方法，比较新旧节点，一边比较一边给真实dom打补丁。</p>
+<h4 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick()"></a>nextTick()</h4><p>面试的时候可以先说vue的更新机制，任何再说nextTick的作用/功能</p>
+<p>vue官方文档对nextTick的说明：在在下次dom更新循环时间结束后执行延迟调用，在修改数据之后获取更新过的dom，让回调函数作用于更新后的dom</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.msg = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="comment">//dom还没更新</span></span><br><span class="line"><span class="built_in">this</span>.nextTick( <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//dom更新了</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>为什么更新后获取的还是之前的数据？但是用nextTick就可以获取到更新的数据？</p>
+<p>这里涉及到vue对dom更新的策略，因为vue在更新dom时是异步执行的。只要监听到数据的变化，vue就会开启一个事件队列，并缓存在同一个事件队列的所有数据变更。在缓存时会自动执行去重等操作，可减少不必要的计算。然后在下一事件循环的Tick中（主线程的执行过程就是一个tick），vue会刷新事件队列并执行实际工作、渲染。</p>
+<p>所以但我们更新数据时，组件还不会立即渲染在更新的dom上，只会在下一次事件循环中重新渲染，但是又想基于更新dom状态上做一些事情，就需要使用nextTick(callback)中，这样回调函数会在dom更新完成后调用。</p>
+<p>我们了解到数据的变化到 <code>DOM</code> 的重新渲染是一个异步过程，发生在下一个 tick。当我们在实际开发中，比如从服务端接口去获取数据的时候，数据做了修改，如果我们的某些方法去依赖了数据修改后的 DOM 变化，我们就必须在 <code>nextTick</code> 后执行。</p>
+<p>当我们在实际开发中，比如从服务端接口去获取数据的时候，数据做了修改，如果我们的某些方法去依赖了数据修改后的 DOM 变化，我们就必须在 <code>nextTick</code> 后执行。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2021/10/20/hello-world/">
-        <h1 class="post-title archive">
-            Hello World
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2021-10-20
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />
